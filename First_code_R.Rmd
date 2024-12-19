@@ -1,0 +1,144 @@
+Carregando e instalando package e1071
+```{r}
+install.packages("e1071")
+library (e1071)
+```
+
+Descarregando package
+```{r}
+
+detach("pachage:e1071", unload=TRUE)
+
+# Remover 
+remove.packages("e1071")
+```
+
+```{r}
+plot(iris[,1:4])
+```
+
+
+```{r}
+iristeste = iris
+save(iristeste, file= "iristeste.Rdata")
+rm (iristeste)
+```
+
+
+```{r}
+iristeste
+
+```
+
+
+```{r}
+class(iris)
+```
+
+```{r}
+load(file="iristeste.Rdata")
+iristeste
+```
+
+```{r}
+x = c(12,34,56,79)
+y = c(1,6,9,14)
+plot(x,y)
+```
+
+```{r}
+install.packages("e1071")
+library(e1071)
+
+```
+
+```{r}
+getwd()
+
+```
+
+
+```{r}
+esoph
+head(esoph)
+```
+
+```{r}
+tail(esoph)
+```
+
+```{r}
+dim(esoph)
+```
+
+```{r}
+dim(esoph)[1]
+```
+```{r}
+length(islands)
+```
+
+```{r}
+colnames(esoph)
+```
+
+```{r}
+rownames(esoph)
+```
+
+```{r}
+head(esoph["agegp"], 5)
+```
+
+```{r}
+summary(esoph)
+```
+
+```{r}
+
+x= file.choose()
+```
+```{r}
+
+install.packages("openxlsx")
+
+```
+
+```{r}
+a = 3
+b = 20
+if (a < b) 
+{
+  print("Verdadeiro")
+}else
+{
+  print("falso")
+}
+```
+```{r}
+x = ifelse(a>10, "A é maior", "A é menor ou igual")
+x
+```
+```{r}
+for (i in 1:10){
+  print (i)
+}
+```
+```{r}
+a = 1
+while (a<=10)
+{
+  print(a)
+  a = a+1
+}
+```
+
+```{r}
+parouimpar <- function(x) {
+  return(ifelse (x%%2==0, "Par", "Impar"))
+}
+
+parouimpar(5)
+parouimpar(12)
+```
+

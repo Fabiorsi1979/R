@@ -1,0 +1,43 @@
+
+Crie duas variáveis Ana e Paulo e atribua a eles os valores de suas idades, sendor respectivamente 8 e 12 anos. As variávesi devem ser do tipo inteiro. Imprima no console "A menina é mais velha" ou "O menino é mais velho" como resultado de um teste lógico.
+
+```{r}
+
+```
+
+BOD é um objeto existente no R. Verifique qual a classe deste objeto.
+
+```{r}
+
+```
+
+Crie um Vetor que armazene números de 1 à 10 e posteriormente imprima na tela somente os números pares.
+
+```{r}
+
+```
+
+women é um dataframe existene no R. Imprima as 10 últimas linhas
+
+```{r}
+
+```
+
+Use a função plot do R. para imprimir um gráfico do atributos Sepal.Width e Petal.Length dko conjunto de dados Iris. O Gráfico deve imprimir apenas das linhas 50 à 100
+
+```{r}
+
+```
+
+Crie dois vetores de tamanhos iguais, some as posições equivalentes dos vetores e imprima o resultado.
+
+```{r}
+
+```
+
+Imprima os número de linhas, de colunas, nome das linhas e nome das colunas do conjunto de dados CO2.
+
+```{r}
+
+```
+fim
