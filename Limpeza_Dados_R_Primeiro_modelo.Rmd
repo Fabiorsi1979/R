@@ -1,0 +1,225 @@
+Importa dados, Strings vazios como NA, transforma Strings em Fatores
+```{r}
+dados = read.csv("Churn.csv", sep = ";", na.strings="", stringsAsFactors =TRUE)
+head(dados)
+summary(dados)
+```
+Nomear as colunas
+
+```{r}
+colnames (dados) = c("Id","Score","Estado","Genero","Idade","Patrimonio","Saldo","Produtos","TemCArtCredito", "Ativo", "Salario", "Saiu")
+head(dados)
+```
+Explorar dados, colunas categóricas
+
+```{r}
+# Estados
+counts = table(dados$Estado)
+barplot(counts, main= "Estados", xlab ="Estados")
+```
+
+
+```{r}
+#Gêneros
+counts = table(dados$Genero)
+barplot(counts, main = "Genero", xlab ="Genero")
+
+```
+
+Explorar colunas numéricas
+```{r}
+summary(dados$Score)
+```
+
+
+```{r}
+boxplot(dados$Score)
+hist(dados$Score)
+```
+
+```{r}
+summary(dados$Idade)
+```
+
+
+```{r}
+boxplot(dados$Idade)
+hist(dados$Idade)
+```
+
+```{r}
+summary(dados$Saldo)
+```
+```{r}
+boxplot(dados$Saldo)
+hist(dados$Saldo)
+```
+```{r}
+summary(dados$Salario)
+```
+```{r}
+boxplot(dados$Salario)
+boxplot(dados$Salario, outline = F)
+```
+Tratando Valores faltantes
+
+```{r}
+dados [!complete.cases(dados),]
+```
+
+Salários - Análise Estatística
+```{r}
+summary(dados$Salario)
+```
+
+Mediana
+```{r}
+#Mediana
+median(dados$Salario, na.rm = T)
+```
+
+Atribuir Mediana a NAS
+```{r}
+#atribuir mediana a NAS
+dados[is.na(dados$Salario),]$Salario= median(dados$Salario, na.rm = T)
+```
+
+Conferir se ainda existe alguns NA em Salário
+```{r}
+# conferir se ainda existe alguns NA em Salário
+dados[!complete.cases(dados$Salario),]
+```
+
+Corrigindo a falta de padronização em Genero
+
+
+Verifica os dados únicos 
+```{r}
+unique(dados$Genero)
+```
+
+Verifica Estatistica do atributo
+```{r}
+summary(dados$Genero)
+```
+
+Transformar " " e M em Masculino (obedecendo a Moda)
+```{r}
+dados[is.na(dados$Genero) | dados$Genero =="M",]$Genero = "Masculino"
+```
+
+Transformar F e Fem em Feminino
+```{r}
+dados[dados$Genero == "F" | dados$Genero == "Fem",]$Genero = "Feminino"
+
+```
+
+```{r}
+summary(dados$Genero)
+```
+
+```{r}
+
+dados$Genero = factor(dados$Genero)
+summary(dados$Genero)
+```
+Idades fora do domínio
+
+```{r}
+summary(dados$Idade)
+```
+Retirar idades fora do domínio numérico
+```{r}
+
+dados[dados$Idade <0 | dados$Idade > 110,]$Idade
+```
+Não temos idades NA
+
+```{r}
+dados[is.na(dados$Idade),]
+```
+Substituindo idades abaixo de 0 e superior a 110 pela média
+```{r}
+dados[dados$Idade < 0 | dados$Idade > 110,]$Idade= median(dados$Idade)
+```
+
+confirmando se deu certo os codigos
+```{r}
+dados[dados$Idade <0 | dados$Idade>110,]
+```
+```{r}
+summary(dados$Idade)
+```
+Buscar os duplicados pelo ID
+```{r}
+duplicados <- dados[duplicated(dados$Id),]
+duplicados
+```
+Verificamos que o ID 81 está duplicado, vamos excluir pelo  índice
+
+```{r}
+
+dados = dados[-c(82),]
+
+```
+
+
+buscando pela linha que estava duplicada
+```{r}
+
+dados[dados$Id == duplicados]
+```
+Visualizar novamente
+```{r}
+
+duplicados = dados[duplicated(dados$Id),]
+duplicados 
+```
+
+Estados fora do domínio
+```{r}
+unique(dados$Estado)
+```
+Visualizando Estatística da coluna
+```{r}
+summary(dados$Estado)
+```
+Acima fica claro que a moda é RS, vamos alterar os categóricos fora do domínio com RS (RP, SP e TD)
+
+```{r}
+
+dados[!dados$Estado %in% c("RS","SC","PR"),]$Estado = "RS"
+
+dados$Estado = factor(dados$Estado)
+summary(dados$Estado)
+```
+Outliers
+
+Criando um parametro com desvio padrão
+```{r}
+
+desv = sd(dados$Salario, na.rm = T)
+
+# outra forma de fazer o mesmo código
+
+dados[dados$Salário>=2 * desv , ]$Salario # estamos assumindo salários com desvio padrão duas vezes acima da média como outlires
+```
+Substitui os Salarios que estão duas vezes acima do desvio padrão pela mediana
+```{r}
+
+dados[dados$Salario >= 2 * desv ,]$Salario = median(dados$Salario)
+```
+
+
+Visualizando
+```{r}
+x = boxplot(dados$Salario)$out
+x
+```
+
+Verificando o resultado
+```{r}
+
+dados[dados$Salario >= 2 * desv ,]$Salario
+```
+
